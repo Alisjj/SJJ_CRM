@@ -26,7 +26,7 @@
           <a
             href="{% url 'leads:lead_update' lead.id %}"
             class="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1"
-            >Details</a
+            >Update Details</a
           >
         </div>
         <p class="leading-relaxed mb-4">
@@ -110,13 +110,4 @@
   </div>
 </section>
 
-<h1>Details of {{lead.first_name}} {{lead.last_name}}</h1>
-<div class="lead">
-  {{lead.first_name}} {{lead.last_name}}. Age: {{lead.age}}
-  <h4>{{lead.agent.user}}</h4>
-</div>
-<a href="{% url 'leads:lead_update' lead.id %}">Update Lead</a>
-<a href="{% url 'leads:lead_delete' lead.id %}">Delete Lead</a>
-<hr />
-<a href="{% url 'leads:lead_list' %}">Go back</a>
 {% endblock %}
