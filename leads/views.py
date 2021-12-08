@@ -1,13 +1,11 @@
 from django.shortcuts import render, render, reverse
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail
 # from django.http import HttpResponse
 from .models import Lead
 from .forms import CustomerUserCreation, LeadModelForm
-# from django.views.generic import TemplateView
-# Create your views here.
 
 from django.views import generic
-from leads import models
 
 
 class SignupView(generic.CreateView):
@@ -22,19 +20,19 @@ class LandinPageView(generic.TemplateView):
     template_name = "landing.html"
 
 
-class LeadListView(generic.ListView):
+class LeadListView(LoginRequiredMixin, generic.ListView):
     template_name = "leads/lead_list.html"
     queryset = Lead.objects.all()
     context_object_name = "leads"
 
 
-class LeadDetailView(generic.DetailView):
+class LeadDetailView(LoginRequiredMixin, generic.DetailView):
     template_name = "leads/lead_detail.html"
     queryset = Lead.objects.all()
     context_object_name = "lead"
 
 
-class LeadCreateView(generic.CreateView):
+class LeadCreateView(LoginRequiredMixin, generic.CreateView):
     template_name = "leads/lead_create.html"
     form_class = LeadModelForm
 
@@ -49,16 +47,16 @@ class LeadCreateView(generic.CreateView):
         return super(LeadCreateView, self).form_valid(form)
 
 
-class LeadUpdateView(generic.UpdateView):
+class LeadUpdateView(LoginRequiredMixin, generic.UpdateView):
     queryset = Lead.objects.all()
     template_name = "leads/lead_update.html"
     form_class = LeadModelForm
 
     def get_success_url(self):
-        return reverse("leads:lead_detail")
+        return reverse("leads:lead_list")
 
 
-class LeadDeleteView(generic.DeleteView):
+class LeadDeleteView(LoginRequiredMixin, generic.DeleteView):
     template_name = "leads/lead_delete.html"
     queryset = Lead.objects.all()
 
