@@ -9,6 +9,7 @@
           {{lead.first_name}} {{lead.last_name}}
         </h1>
         <div class="flex mb-4">
+          {% if request.user.is_organizer %}
           <a
             class="
               flex-grow
@@ -28,6 +29,12 @@
             class="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1"
             >Update Details</a
           >
+          {% else %}
+          <a class="flex-grow text-red-500 border-b-2 border-red-500 py-2 text-lg px-1">
+            Description
+          </a>
+          {% endif %}
+
         </div>
         <p class="leading-relaxed mb-4">
           Sjj locavore kickstarter distillery. Mixtape chillwave tumeric
