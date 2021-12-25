@@ -26,8 +26,11 @@
         Customer Relations Manager
       </h1>
       <p class="mb-8 leading-relaxed">An Easier Way Manage Your Leads.</p>
+      {% if not user.is_authenticated %}
       <div class="flex justify-center">
-        <button
+
+        <a
+          href="{% url 'login' %}"
           class="
             inline-flex
             text-white
@@ -41,26 +44,12 @@
             text-lg
           "
         >
-          Button
-        </button>
-        <button
-          class="
-            ml-4
-            inline-flex
-            text-gray-700
-            bg-gray-100
-            border-0
-            py-2
-            px-6
-            focus:outline-none
-            hover:bg-gray-200
-            rounded
-            text-lg
-          "
-        >
-          Button
-        </button>
+          Get Started
+      </a>
+      
+      
       </div>
+      {% endif %}
     </div>
   </div>
 </section>

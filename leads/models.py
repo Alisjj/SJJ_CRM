@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models.signals import post_save
 from django.contrib.auth.models import AbstractUser
+from django_countries.fields import CountryField
 
 
 class User(AbstractUser):
@@ -24,6 +25,7 @@ class Lead(models.Model):
     description = models.TextField()
     phone_number = models.CharField(max_length=40)
     email = models.EmailField()
+    location = CountryField()
     date_added = models.DateTimeField(auto_now_add=True)
     agent = models.ForeignKey(
         "Agent", null=True, blank=True, on_delete=models.SET_NULL)
