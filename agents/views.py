@@ -1,5 +1,5 @@
 import random
-
+from django.conf import settings
 from django.core.mail import send_mail
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -34,7 +34,7 @@ class AgentCreateView(OrganizerAndLoginRequiredMixin, generic.CreateView):
         send_mail(
             subject="You are invited to be an agent",
             message="You were added as an agent on DJCRM. Please come login to start working.",
-            from_email="admin@test.com",
+            from_email = getattr(settings, 'DEFAULT_FROM_EMAIL'),
             recipient_list=[user.email]
         )
         return super(AgentCreateView, self).form_valid(form)
